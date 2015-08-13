@@ -9,6 +9,7 @@
 #import "UIImage+MultiFormat.h"
 #import "UIImage+GIF.h"
 #import "NSData+ImageContentType.h"
+#import "SDWebImageManager.h"
 #import <ImageIO/ImageIO.h>
 
 #ifdef SD_WEBP
@@ -43,6 +44,13 @@
         }
     }
 
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    if (nil != manager.imageHandler) {
+        UIImage *replacedImage = manager.imageHandler(image);
+        if (nil != replacedImage) {
+            return replacedImage;
+        }
+    }
 
     return image;
 }
