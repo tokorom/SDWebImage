@@ -373,7 +373,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 - (UIImage *)diskImageForKey:(NSString *)key options:(NSUInteger)options {
     NSData *data = [self diskImageDataBySearchingAllPathsForKey:key];
     if (data) {
-        UIImage *image = [UIImage sd_imageWithData:data];
+        UIImage *image = [UIImage sd_imageWithData:data options:options];
         image = [self scaledImageForKey:key image:image];
         if (self.shouldDecompressImages) {
             image = [UIImage decodedImageWithImage:image];
@@ -417,7 +417,7 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
         }
 
         @autoreleasepool {
-            UIImage *diskImage = [self diskImageForKey:key];
+            UIImage *diskImage = [self diskImageForKey:key options:options];
             if (diskImage && self.shouldCacheImagesInMemory) {
                 NSUInteger cost = SDCacheCostForImage(diskImage);
                 [self.memCache setObject:diskImage forKey:key cost:cost];

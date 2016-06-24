@@ -412,7 +412,7 @@ didReceiveResponse:(NSURLResponse *)response
             if (self.options & SDWebImageDownloaderIgnoreCachedResponse && responseFromCached) {
                 completionBlock(nil, nil, nil, YES);
             } else if (self.imageData) {
-                UIImage *image = [UIImage sd_imageWithData:self.imageData];
+                UIImage *image = [UIImage sd_imageWithData:self.imageData options: self.options];
                 NSString *key = [[SDWebImageManager sharedManager] cacheKeyForURL:self.request.URL];
                 image = [self scaledImageForKey:key image:image];
                 
