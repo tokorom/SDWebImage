@@ -19,6 +19,10 @@
 @implementation UIImage (MultiFormat)
 
 + (UIImage *)sd_imageWithData:(NSData *)data {
+    return [self sd_imageWithData:data options:0];
+}
+
++ (UIImage *)sd_imageWithData:(NSData *)data options:(NSUInteger)options {
     if (!data) {
         return nil;
     }
@@ -26,7 +30,8 @@
     UIImage *image;
     NSString *imageContentType = [NSData sd_contentTypeForImageData:data];
     if ([imageContentType isEqualToString:@"image/gif"]) {
-        image = [UIImage sd_animatedGIFWithData:data];
+        BOOL supportAnimation = !(options & SDWebImageIgnoreGIFAnimation);
+        image = [UIImage sd_animatedGIFWithData:data supportAnimation:supportAnimation];
     }
 #ifdef SD_WEBP
     else if ([imageContentType isEqualToString:@"image/webp"])

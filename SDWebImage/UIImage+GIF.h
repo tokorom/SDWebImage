@@ -13,6 +13,7 @@
 + (UIImage *)sd_animatedGIFNamed:(NSString *)name;
 
 + (UIImage *)sd_animatedGIFWithData:(NSData *)data;
++ (UIImage *)sd_animatedGIFWithData:(NSData *)data supportAnimation:(BOOL)supportAnimation;
 
 - (UIImage *)sd_animatedImageByScalingAndCroppingToSize:(CGSize)size;
 

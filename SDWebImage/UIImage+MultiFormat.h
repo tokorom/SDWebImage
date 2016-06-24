@@ -11,5 +11,6 @@
 @interface UIImage (MultiFormat)
 
 + (UIImage *)sd_imageWithData:(NSData *)data;
++ (UIImage *)sd_imageWithData:(NSData *)data options:(NSUInteger)options;
 
 @end

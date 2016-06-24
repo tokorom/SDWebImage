@@ -367,6 +367,10 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 }
 
 - (UIImage *)diskImageForKey:(NSString *)key {
+    return [self diskImageForKey:key options:0];
+}
+
+- (UIImage *)diskImageForKey:(NSString *)key options:(NSUInteger)options {
     NSData *data = [self diskImageDataBySearchingAllPathsForKey:key];
     if (data) {
         UIImage *image = [UIImage sd_imageWithData:data];
@@ -386,6 +390,10 @@ FOUNDATION_STATIC_INLINE NSUInteger SDCacheCostForImage(UIImage *image) {
 }
 
 - (NSOperation *)queryDiskCacheForKey:(NSString *)key done:(SDWebImageQueryCompletedBlock)doneBlock {
+    return [self queryDiskCacheForKey:key options:0 done:doneBlock];
+}
+
+- (NSOperation *)queryDiskCacheForKey:(NSString *)key options:(NSUInteger)options done:(SDWebImageQueryCompletedBlock)doneBlock {
     if (!doneBlock) {
         return nil;
     }
