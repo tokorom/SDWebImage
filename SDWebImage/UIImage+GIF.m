@@ -12,6 +12,10 @@
 @implementation UIImage (GIF)
 
 + (UIImage *)sd_animatedGIFWithData:(NSData *)data {
+    return [self sd_animatedGIFWithData:data supportAnimation:true];
+}
+
++ (UIImage *)sd_animatedGIFWithData:(NSData *)data supportAnimation:(BOOL)supportAnimation {
     if (!data) {
         return nil;
     }
@@ -41,6 +45,10 @@
             [images addObject:[UIImage imageWithCGImage:image scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp]];
 
             CGImageRelease(image);
+
+            if (!supportAnimation) {
+                break;
+            }
         }
 
         if (!duration) {
